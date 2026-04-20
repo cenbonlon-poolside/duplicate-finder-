@@ -1,53 +1,92 @@
-# Sptinder - Spotify Music Tinder
+# Duplicate Code Finder
 
-A modern, real-time music dating application built with microservices architecture on Kubernetes. Users can swipe through songs from Spotify, match with other music lovers, and create collaborative playlists.
+A simple Python script to detect exact duplicate code in TypeScript/JavaScript projects.
 
-## 🎵 Features
+## Features
 
-- **Spotify Integration**: OAuth authentication and access to user's Spotify library
-- **Real-time Swiping**: Tinder-like interface for discovering new music
-- **Matching System**: Find users with similar music tastes
-- **Live Chat**: Real-time messaging with matched users
-- **Collaborative Playlists**: Create shared playlists with matches
-- **Music Recommendations**: AI-powered song suggestions based on preferences
-- **Responsive Design**: Mobile-first UI built with React and Material-UI
+- Scans `.ts`, `.tsx`, `.js`, `.jsx` files
+- Normalizes code by removing comments and whitespace
+- Finds exact duplicates after normalization
+- Generates human-readable reports
+- Skips common directories (node_modules, .git, dist, etc.)
 
-## 🏗️ Architecture
+## Installation
 
-### Microservices
+Clone this repository:
 
-- **API Service**: REST API handling authentication, business logic, and data management
-- **Real-time Service**: WebSocket server for live features (chat, notifications)
-- **Worker Service**: Background job processing (recommendations, playlist sync)
-- **Frontend Service**: React SPA serving the user interface
+```bash
+git clone https://github.com/cenbonlon-poolside/duplicate-finder-.git
+cd duplicate-finder-
+```
 
-### Technology Stack
+## Usage
 
-- **Backend**: Node.js, Express.js, TypeScript
-- **Database**: PostgreSQL with Prisma ORM
-- **Cache**: Redis for session management and real-time features
-- **Frontend**: React, TypeScript, Material-UI
-- **Real-time**: Socket.io
-- **Containerization**: Docker
-- **Orchestration**: Kubernetes with Helm
-- **CI/CD**: GitHub Actions
-- **Monitoring**: Prometheus + Grafana
+Run the script on any project directory:
 
-## 🚀 Quick Start
+```bash
+python3 duplicate_finder.py
+```
 
-### Prerequisites
+The script will:
+1. Scan for TypeScript/JavaScript files
+2. Normalize code content
+3. Detect duplicates
+4. Print a formatted report
 
-- Docker and Docker Compose
-- Node.js 18+
-- Kubernetes cluster (local: minikube, kind, or k3s)
-- Helm 3+
-- Spotify Developer Account
+## Customization
 
-### Local Development
+To scan a different project, edit the `project_path` variable in `duplicate_finder.py`:
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-org/sptinder.git
+```python
+project_path = "/path/to/your/project"
+```
+
+## What It Detects
+
+- Exact duplicates after removing comments and normalizing whitespace
+- Files with identical logic but different formatting
+- Accidental file copies or duplicates
+
+## Limitations
+
+- Only detects exact duplicates (not semantic similarities)
+- Requires Python 3
+- Designed for TypeScript/JavaScript projects
+
+## Example Output
+
+```
+🔍 Starting duplicate code analysis...
+
+📁 Scanning for TypeScript/JavaScript files...
+   Found 42 files
+
+🔎 Analyzing code for duplicates...
+   Found 2 duplicates
+
+📊 Generating report...
+
+============================================================
+🔍 DUPLICATE CODE REPORT
+============================================================
+
+Found 2 duplicate(s)
+
+--- Duplicate #1 ---
+📄 Original: src/utils/helpers.ts
+📄 Copy:     src/components/Button.tsx
+
+📝 Code Preview:
+export const formatDate = (date: Date): string => { return date.toISOString().split('T')[0]; };
+```
+
+## Contributing
+
+Feel free to submit issues or pull requests!
+
+## License
+
+MIT License
    cd sptinder
    ```
 
